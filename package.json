@@ -1,0 +1,13 @@
+{
+  "name": "bongbongcoin",
+  "version": "1.0.0",
+  "description": "Nodejs를 활용한 bongbongcoin 만들기",
+  "main": "index.js",
+  "repository": "http://github.com/bongbongco/bongbongcoin",
+  "author": "seungyonglee <bongbongco@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
+}
