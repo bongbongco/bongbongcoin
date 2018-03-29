@@ -7,14 +7,20 @@ const getSockets = () => sockets;
 const startP2PServer = server => {
     const wsServer= new WebSockets.Server({ server });
     wsServer.on("connection", ws => {
-        console.log(`Hello Socket!`);
+        initSocketConnection(ws);
     });
     console.log("bongbongcoin P2P Server Running!");
 };
 
 const initSocketConnection = socket => {
     sockets.push(socket);
-}
+    socket.on("message", (data) => {
+        console.log(data);
+    });
+    setTimeout(() => { 
+        socket.send("welcome");
+    }, 5000);
+};
 
 const connectToPeers = newPeer => {
     const ws = new WebSockets(newPeer);
