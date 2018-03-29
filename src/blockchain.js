@@ -26,11 +26,10 @@ const getTimestamp = () => new Date().getTime() / 1000;
 
 const getBlockchain = () => blockchain;
 
-const createHash = (index, previousHash, timestamp, data) => {
+const createHash = (index, previousHash, timestamp, data) => 
     CryptoJS.SHA256(
         index + previousHash + timestamp + JSON.stringify(data)
     ).toString();
-}
 
 const createNewBlock = data => {
     const previousBlock = getLastBlock();
@@ -48,7 +47,7 @@ const createNewBlock = data => {
         previousBlock.hash,
         newTimestamp,
         data
-    )
+    );
     addBlockToChain(newBlock);
     return newBlock;
 };
@@ -64,13 +63,13 @@ const isNewBlockValid = (candidateBlock, latestBlock) => {
     if(!isNewStructureValid(candidateBlock)) {
         console.log("The candidate block structure is not valid");
         return false;
-    } else if(latestBlock.index + 1 !== candidateBlock.indexs) {
+    } else if(latestBlock.index + 1 !== candidateBlock.index) {
         console.log("The candidate block doesnt have a valid index");
         return false;
     } else if(latestBlock.hash !== candidateBlock.previousHash) {
         console.log("The previousHash of the candidate block is not the hash of the latest block");
         return false;
-    } else if(getBlockHash(candidatBlock) !== candidateBlock.hash){
+    } else if(getBlockHash(candidateBlock) !== candidateBlock.hash){
         console.log("The hash of this block is invalid");
         return false;
     }
@@ -106,7 +105,7 @@ const isChainValid = (candidateChain) => {
 const replaceChain = candidateChain => {
     if(
         isChainValid(candidateChain) && 
-        candidateChain.length > getBlockchain.length
+        candidateChain.length > getBlockchain().length
     ) {
         blockchain = candidateChain;
         return true;
@@ -117,7 +116,7 @@ const replaceChain = candidateChain => {
 
 const addBlockToChain = candidateBlock => {
     if(isNewBlockValid(candidateBlock, getLastBlock())) {
-        getBlockchain.push(candidateBlock);
+        blockchain.push(candidateBlock);
         return true;
     } else {
         return false;
